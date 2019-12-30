@@ -18,8 +18,8 @@
     <div class="" style="position: relative;{% if user.is_authenticated %}margin-top: 50px;{% else %}margin-top: 0;{% endif %}" id="welcome_div_parent">
 
         <div id="welcome_div">
-            <h1 class="welcome_first">{{ Header_Welcome }}</h1>
-            <h2 class="welcome_second">{{ Header_SecondPhrase }}</h2>
+            <h1 class="welcome_first">.</h1>
+            <h2 class="welcome_second">.</h2>
         </div>
 
         <div id="welcome_search_div">
@@ -28,7 +28,7 @@
                 <div class="" style="position: relative;height: 50px;">
                     <i class='fas fa-map-marker-alt city_search_icon'></i>
                     <input type="text" class="form-control autocomplete home_filter_city" id="home_filter_city"
-                           name="home_filter_city" value="" placeholder="{{ Search_Placeholder }}" onchange="UpdateSearchField(this.id)"
+                           name="home_filter_city" value="" placeholder="pesquisar" onchange="UpdateSearchField(this.id)"
                             autocomplete="off">
                     <input type="submit" class="home_filter_submit" name="home_filter_submit" id="home_filter_submit"
                            value="" onclick="ValidateCity(this.id)">
