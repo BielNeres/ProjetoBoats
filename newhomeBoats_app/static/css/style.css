@@ -238,17 +238,32 @@ footer a {
     font-size: 11pt;
 }
 
-
-
 h2{
     color: white;
-    font-size: 12pt;
-    font-weight: 500;
+    font-size: 13pt;
+    font-weight: 550;
 }
 h3{
     color: white;
+    font-size: 11pt;
+    text-align: justify;
+}
+h4{
+    color: white;
     font-size: 10pt;
     text-align: justify;
+}
+
+.col-md-2 a{
+    font-size: 10pt;
+}
+
+#refs{
+    margin-top: 20px;
+}
+
+#logo_footer{
+    margin-top: 70%;
 }
 
 a:hover {
