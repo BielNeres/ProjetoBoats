@@ -1,0 +1,73 @@
+{% load static %}
+
+<div class="top_header_menu" style="z-index:1000;{% if user.is_authenticated == False %} height: 200px; {% endif %}">
+    <nav class="navbar navbar-expand-lg navbar-light w-100 h-100" id="menu_nav">
+        <div class="d-flex flex-grow-1" style="{% if user.is_authenticated == False %} margin-top: -100px; {% endif %}" id="mobile_top_menu_img">
+            <span class="w-100 d-lg-none d-block"><!-- hidden spacer to center brand on mobile --></span>
+            <a class="navbar-brand" href="#">
+                <img src="{% static 'media/admin/logo_black.png' %} " width="200"
+                     class="d-inline-block align-top align-left" alt="bnboats" id="top_bar_logo">
+            </a>
+            <div class="w-100 text-right">
+                <button class="navbar-toggler" id="mobile_top_menu" type="button" data-toggle="collapse" data-target="#top_navBar" onclick="OpenMobileMenu('{{ user.is_authenticated }}')">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+        <div class="d-flex flex-grow-1 justify-content-center hideOnly" id="top_bar_search">
+            <!-- list of cities to load in the search input -->
+            <input type="hidden" id="all_cities" value="{{ cityList }}">
+            <form method="post" style="width: 600px">
+                {% csrf_token %}
+                <div class="" style="position: relative;height: 50px;">
+                    <i class='fas fa-map-marker-alt city_search_icon'></i>
+                    <input type="text" class="form-control autocomplete home_filter_city" id="top_filter_city" value=""
+                           placeholder="Buscar cidade de embarque"  onchange="UpdateSearchField(this.id)">
+                    <input type="submit" class="home_filter_submit" id="topbar_filter_submit" value=""
+                           onclick="ValidateCity(this.id)">
+                    <input type="hidden" class="search_city_name" name="search_city_name" id="top_search_city_name" value="">
+                </div>
+            </form>
+        </div>
+        <div class="collapse navbar-collapse flex-grow-1 text-right" id="top_navBar">
+            {% if user.is_authenticated %}
+                <div class="top_user_menu navbar-nav ml-auto flex-nowrap" id="top_user_menu" onclick="openUserMenu()" style="">
+                    <div class="lang_sel hideOnly">
+                        PT
+                    </div>
+                    <div class="top_menu_user_picture">
+                        <img src="{{ STATIC_MEDIA_URL }}{{ user.userprofile.image }}" alt="profile"
+                        onerror="this.src='{% static 'media/admin/default_profile.png' %}'" id="own_img">
+                        {% if no_unread_msgs != 0 %}
+                            <div class="notif_div notif_no">{{ no_unread_msgs }}</div>
+                        {% endif %}
+                    </div>
+                    <a class="top_menu_user_tools dropdown" id="top_user_menu_trigger" data-toggle="dropdown" onclick="openUserMenu()">
+                        <span class="menu_username top_navBar_username">{{ first_name }}</span>
+                    </a>
+                    <i class="fas fa-caret-down top_navBar_username" style="float: left;margin-left:5px;"></i>
+                </div>
+            {% else %}
+                <ul class="navbar-nav ml-auto flex-nowrap" style="margin-right: 10px;">
+                    <li class="nav-item">
+                        <a href="#" class="top_menu_nav-link">Como funciona</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="top_menu_nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="top_menu_nav-link" onclick="modalSignIn()" data-toggle="modal" data-target="#modal_login">Entrar</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ml-auto flex-nowrap {{ user.is_authenticated }}" style="margin: 45px 0;" id="mobile_top_menu_btns">
+                    <li class="nav-item">
+                        <a href="#" class="top_menu_nav-link nav-btn" onclick="modalSignUp('user')" data-toggle="modal" data-target="#modal_login" id="modal_login_btn">CADASTRE-SE E ALUGUE</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="top_menu_nav-link nav-btn" onclick="modalSignUp('owner')" data-toggle="modal" data-target="#modal_login" id="modal_login_boat">ANUNCIE SEU BARCO</a>
+                    </li>
+                </ul>
+            {% endif %}
+        </div>
+    </nav>
+</div>
