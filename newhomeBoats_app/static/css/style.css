@@ -274,8 +274,13 @@ footer a {
     font-size: 2.0rem;
     display: flex;
     justify-content: center;
-    color: #0954af;
+    color: #074da1;
     font-weight: 750;
+    letter-spacing: .1rem;
+}
+
+#margin{
+    margin-top: 4.0rem;
 }
 
 .carousel-control-prev-icon {
@@ -338,6 +343,7 @@ footer a {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 #border{
