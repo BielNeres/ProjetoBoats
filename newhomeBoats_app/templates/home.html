@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{% static 'css/css_bview.css' %}">
     <link rel="stylesheet" href="{% static 'css/css_results.css' %}">
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css_how_it_works.css' %}">
     
 
 {% endblock %}
@@ -41,6 +42,33 @@
 
         <div class="home_back_img" id="home_back_img"></div>
     </div>
+
+    <h2 id="titles" class="my-4">ALUGAR BARCO É FACIL</h2>
+    <div class="template">
+        <div class="infos">
+            <div class="city">
+                <h2>1. ESCOLHA A CIDADE</h2>
+                <img src="{% static 'media/admin/praia.jpg' %}">
+                <p>Temos barcos em varios lugares do Brasil. Digite a cidade que gostaria de passear para ver as opções de embarcações.</p>
+            </div>
+            <div class="boat">
+                <h2>2. ENCONTRE O BARCO</h2>
+                <img src="{% static 'media/admin/praia.jpg' %}">
+                <p>Ao escolher confira se o barco tem tudo o que você precisa. Se tiver dúvida, é so clicar no "Fale com o Capitão" para perguntar diretamente ao proprietário.</p>
+            </div>
+            <div class="date">
+                <h2>3. SELECIONE A DATA</h2>
+                <img src="{% static 'media/admin/praia.jpg' %}">
+                <p>Quanto tempo quer passar a bordo? Exitem opções para quem quer passar 2 hora e até semanas embarcado. Escolha o tempo de passeio, depois defina a data e a quantidade de pessoas.</p>
+            </div>
+            <div class="embarque">
+                <h2>4. RESERVE O EMBARQUE</h2>
+                <img src="{% static 'media/admin/praia.jpg' %}">
+                <p>Faça seu cadastro e reserve a embarcação pagando diretamente no site. Assim que seu pedido for aceito você receberá o telefone do capitão com os detalhes para o embarque.</p>
+            </div>
+        </div>    
+    </div>
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -58,15 +86,15 @@
                             ic-target="#search_results"
                             ic-indicator="#indicator"
                         >
-                            <img class="results_div_img img-fluid" src="{% static 'media/admin/background.jpg' %}" alt="boat"
+                            <img class="results_div_img img-fluid" src="{% static 'media/admin/ilhabela3.jpg' %}" alt="boat"
                                     onerror="this.src='{% static 'media/admin/semimagem.jpg' %}'">
                             <i class="far fa-heart heart" id="heart_{{ boat.pk }}"
                                 onmouseenter="$('#'+this.id).removeClass('far').addClass('fas');"
                                 onmouseleave="if (!($('#'+this.id).hasClass('added'))){$('#'+this.id).removeClass('fas').addClass('far');}"
                                 onclick="event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();AddToFavorite(this.id, '{{ user.is_authenticated }}');"></i>
-                                <span><strong>R$ {{ boat.price_overnight }}</strong>/24h</span>
+                                <span><strong>R$ 4147,50</strong>/8h</span>
                         </div>
-                        <p class="fontSizeOneive w-100" style="margin-top: 20px;">{{ boat.title }}</p>
+                        <p class="fontSizeOneive w-100" style="margin-top: 20px;">Aluguel de Lancha 36' Ilhabela</p>
                         <div class="results_div_owner_pic">
                             <img src="{% static 'media/admin/background.jpg' %}" alt="owner"
                                     onerror="this.src='{% static 'media/admin/default_profile.png' %}'">
@@ -75,11 +103,11 @@
                             <div class="row">
                                 <!-- OWNER NAME -->
                                 <div class="col-xl-6" style="padding-left: 0;"> <!--results_div_owner_name -->
-                                    <p class="fontSizeOneTwo owner_name_p">{{ boat.user.first_name }}</p>
+                                    <p class="fontSizeOneTwo owner_name_p">Marco Ferrara</p>
                                 </div>
                                 <!-- BOAT CAPACITY -->
                                 <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_capacity -->
-                                    <p class="fontSizeOneTwo"><i class="fas fa-users"></i> até {{ boat.capacity }} pessoas</p>
+                                    <p class="fontSizeOneTwo"><i class="fas fa-users"></i> até 10 pessoas</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -93,7 +121,56 @@
                                 <!-- BOAT PRICE PER PERSON -->
                                 <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_price_pperson -->
                                     <div class="results_subdiv_price_pperson">
-                                        <p><strong>R$ {{ boat.price_pperson_overnight }},00</strong> /pessoa</p>
+                                        <p><strong>R$ 414,00</strong> /pessoa</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 boat_single_div" onclick="$('#boat_view_{{ boat.pk }}').submit()"  id="boat_{{ boat.pk }}" style=" padding: 1%;">
+                        <div class="results_div_item"
+                        {% if forloop.last and boats.has_next %}
+                            ic-trigger-on="scrolled-into-view"
+                            ic-target="#search_results"
+                            ic-indicator="#indicator"
+                        {% endif %}
+                        >
+                            <img class="results_div_img img-fluid" src="{% static 'media/admin/ilhabela2.jpg' %}" alt="boat"
+                                    onerror="this.src='{% static 'media/admin/semimagem.jpg' %}'">
+                            <i class="far fa-heart heart" id="heart_{{ boat.pk }}"
+                                onmouseenter="$('#'+this.id).removeClass('far').addClass('fas');"
+                                onmouseleave="if (!($('#'+this.id).hasClass('added'))){$('#'+this.id).removeClass('fas').addClass('far');}"
+                                onclick="event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();AddToFavorite(this.id, '{{ user.is_authenticated }}');"></i>
+                                <span><strong>R$ 2133,00</strong>/4h</span>
+                        </div>
+                        <p class="fontSizeOneive w-100" style="margin-top: 20px;">Aluguel de Lancha 27' Ilhabela</p>
+                        <div class="results_div_owner_pic">
+                            <img src="{% static 'media/admin/background.jpg' %}" alt="owner"
+                                    onerror="this.src='{% static 'media/admin/default_profile.png' %}'">
+                        </div>
+                        <div class="container"> <!-- results_div_owner_data -->
+                            <div class="row">
+                                <!-- OWNER NAME -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!--results_div_owner_name -->
+                                    <p class="fontSizeOneTwo owner_name_p">Paulo Castan</p>
+                                </div>
+                                <!-- BOAT CAPACITY -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_capacity -->
+                                    <p class="fontSizeOneTwo"><i class="fas fa-users"></i> até 6 pessoas</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- OWNER REVIEW SCORE -->
+                                <div class="col-xl-6" style="display: flex;padding-left: 0;"> <!-- results_div_owner_review -->
+                                    <div class="results_div_owner_review" score="{{ boat.review_score }}"
+                                        score-count="{{ boat.reviews_count }}">
+                                        <img src="{% static 'media/admin/shat.png' %}" alt="captain" style="width: 20px;">
+                                    </div>
+                                </div>
+                                <!-- BOAT PRICE PER PERSON -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_price_pperson -->
+                                    <div class="results_subdiv_price_pperson">
+                                        <p><strong>R$ 355,00</strong> /pessoa</p>
                                     </div>
                                 </div>
                             </div>
@@ -113,56 +190,7 @@
                                 onmouseenter="$('#'+this.id).removeClass('far').addClass('fas');"
                                 onmouseleave="if (!($('#'+this.id).hasClass('added'))){$('#'+this.id).removeClass('fas').addClass('far');}"
                                 onclick="event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();AddToFavorite(this.id, '{{ user.is_authenticated }}');"></i>
-                                <span><strong>R$ {{ boat.price_overnight }}</strong>/24h</span>
-                        </div>
-                        <p class="fontSizeOneive w-100" style="margin-top: 20px;">{{ boat.title }}</p>
-                        <div class="results_div_owner_pic">
-                            <img src="{% static 'media/admin/background.jpg' %}" alt="owner"
-                                    onerror="this.src='{% static 'media/admin/default_profile.png' %}'">
-                        </div>
-                        <div class="container"> <!-- results_div_owner_data -->
-                            <div class="row">
-                                <!-- OWNER NAME -->
-                                <div class="col-xl-6" style="padding-left: 0;"> <!--results_div_owner_name -->
-                                    <p class="fontSizeOneTwo owner_name_p">{{ boat.user.first_name }}</p>
-                                </div>
-                                <!-- BOAT CAPACITY -->
-                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_capacity -->
-                                    <p class="fontSizeOneTwo"><i class="fas fa-users"></i> até {{ boat.capacity }} pessoas</p>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <!-- OWNER REVIEW SCORE -->
-                                <div class="col-xl-6" style="display: flex;padding-left: 0;"> <!-- results_div_owner_review -->
-                                    <div class="results_div_owner_review" score="{{ boat.review_score }}"
-                                        score-count="{{ boat.reviews_count }}">
-                                        <img src="{% static 'media/admin/shat.png' %}" alt="captain" style="width: 20px;">
-                                    </div>
-                                </div>
-                                <!-- BOAT PRICE PER PERSON -->
-                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_price_pperson -->
-                                    <div class="results_subdiv_price_pperson">
-                                        <p><strong>R$ {{ boat.price_pperson_overnight }},00</strong> /pessoa</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 boat_single_div" onclick="$('#boat_view_{{ boat.pk }}').submit()"  id="boat_{{ boat.pk }}" style=" padding: 1%;">
-                        <div class="results_div_item"
-                        {% if forloop.last and boats.has_next %}
-                            ic-trigger-on="scrolled-into-view"
-                            ic-target="#search_results"
-                            ic-indicator="#indicator"
-                        {% endif %}
-                        >
-                            <img class="results_div_img img-fluid" src="{% static 'media/admin/background.jpg' %}" alt="boat"
-                                    onerror="this.src='{% static 'media/admin/semimagem.jpg' %}'">
-                            <i class="far fa-heart heart" id="heart_{{ boat.pk }}"
-                                onmouseenter="$('#'+this.id).removeClass('far').addClass('fas');"
-                                onmouseleave="if (!($('#'+this.id).hasClass('added'))){$('#'+this.id).removeClass('fas').addClass('far');}"
-                                onclick="event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();AddToFavorite(this.id, '{{ user.is_authenticated }}');"></i>
-                                <span><strong>R$ {{ boat.price_overnight }}</strong>/24h</span>
+                                <span><strong>R$ 5806,50</strong>/8</span>
                         </div>
                         <p class="fontSizeOneive w-100" style="margin-top: 20px;">Aluguel de Escuna 70' Ilhabela</p>
                         <div class="results_div_owner_pic">
