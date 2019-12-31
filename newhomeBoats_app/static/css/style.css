@@ -657,7 +657,7 @@ body {
 .redes-sociais a.yt{background-image: url('/static/media/admin/youtube.png');}
 .redes-sociais a.ig{background-image: url('/static/media/admin/instagram.png'); margin-left: calc((100% - 100px) /2);}
 .redes-sociais a.ml{background-image: url('/static/media/admin/mail_white.png');background-size: auto 80% }
-
+.redes-sociais a.wp{background-image: url('/static/media/admin/wpp_pw.png'); background-size: auto 80% }
 /* SOCIAL MEDIA LINKS FROM THE RIGHT MENU */
 .redes-sociais-color {
     position: absolute;
@@ -669,6 +669,13 @@ body {
     border-radius: 5px;
     margin-top:2px;
 }
+.redes-sociais-color a.wp{
+    background-image: url('/static/media/admin/wpp.png');
+    background-size: auto 100%;
+    border-radius: 5px;
+    margin-top:2px;
+}
+
 .redes-sociais-color a.yt{
     background-image: url('/static/media/admin/youtube_bw.webp');
     width: 35px;
