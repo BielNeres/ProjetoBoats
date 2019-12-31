@@ -227,7 +227,7 @@
 }
 
 footer {
-    background-color: rgb(27, 35, 151);
+    background-color: rgb(7, 46, 100);
     padding: 3% 3%;
     margin: 0 !important;
 }
@@ -238,23 +238,72 @@ footer a {
     font-size: 11pt;
 }
 
-h2{
+#solution h4{
     color: white;
     font-size: 13pt;
     font-weight: 550;
 }
-h3{
+
+#solution h6{
+    color: white;
+    font-size: 10.5pt;
+    text-align: justify;
+}
+
+#destiny h4{
+    color: white;
+    font-size: 13pt;
+    font-weight: 550;
+}
+
+#redes h4{
     color: white;
     font-size: 11pt;
     text-align: justify;
 }
-h4{
+
+#redes h6{
+    margin-top: 30px;
     color: white;
     font-size: 10pt;
     text-align: justify;
 }
 
-.col-md-2 a{
+#titles{
+    font-size: 2.0rem;
+    display: flex;
+    justify-content: center;
+    color: #0954af;
+    font-weight: 550;
+}
+
+.top_header_menu ul a{
+    color: rgb(5, 30, 63);
+    font-weight: 600;
+}
+
+#text_div{
+    display: flex;
+    justify-content: center;
+}
+#text_div h4{
+    margin-top: 10%;
+    font-size: 16pt;
+    color: rgb(5, 30, 63);
+    font-weight: 600;
+}
+
+.colaboradores{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#blog h3{
+    font-size: 1.75rem;
+}
+
+#destiny a{
     font-size: 10pt;
 }
 
