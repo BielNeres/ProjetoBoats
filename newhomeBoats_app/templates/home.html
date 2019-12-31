@@ -7,6 +7,9 @@
     <meta name="keywords" content="aluguel,barcos,iates,lanchas,veleiros,traineiras,passeios,angra,paraty,santos,guaruja,ilhas,pesca,aluguel de barco, aluguel de lancha">
 
     <link rel="stylesheet" href="{% static 'css/css_home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css_bview.css' %}">
+    <link rel="stylesheet" href="{% static 'css/css_results.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
     
 
 {% endblock %}
@@ -38,7 +41,177 @@
 
         <div class="home_back_img" id="home_back_img"></div>
     </div>
-
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active"></div>
+            <h2 id="titles" class="my-4">NOSSOS PRINCIPAIS BARCOS</h2>
+                <div class="row" style="justify-content: center;">
+                    <div class="col-md-3 boat_single_div"style="padding: 1%;" >
+                        <div class="results_div_item"
+                            ic-trigger-on="scrolled-into-view"
+                            ic-target="#search_results"
+                            ic-indicator="#indicator"
+                        >
+                            <img class="results_div_img img-fluid" src="{% static 'media/admin/background.jpg' %}" alt="boat"
+                                    onerror="this.src='{% static 'media/admin/semimagem.jpg' %}'">
+                            <i class="far fa-heart heart" id="heart_{{ boat.pk }}"
+                                onmouseenter="$('#'+this.id).removeClass('far').addClass('fas');"
+                                onmouseleave="if (!($('#'+this.id).hasClass('added'))){$('#'+this.id).removeClass('fas').addClass('far');}"
+                                onclick="event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();AddToFavorite(this.id, '{{ user.is_authenticated }}');"></i>
+                                <span><strong>R$ {{ boat.price_overnight }}</strong>/24h</span>
+                        </div>
+                        <p class="fontSizeOneive w-100" style="margin-top: 20px;">{{ boat.title }}</p>
+                        <div class="results_div_owner_pic">
+                            <img src="{% static 'media/admin/background.jpg' %}" alt="owner"
+                                    onerror="this.src='{% static 'media/admin/default_profile.png' %}'">
+                        </div>
+                        <div class="container"> <!-- results_div_owner_data -->
+                            <div class="row">
+                                <!-- OWNER NAME -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!--results_div_owner_name -->
+                                    <p class="fontSizeOneTwo owner_name_p">{{ boat.user.first_name }}</p>
+                                </div>
+                                <!-- BOAT CAPACITY -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_capacity -->
+                                    <p class="fontSizeOneTwo"><i class="fas fa-users"></i> até {{ boat.capacity }} pessoas</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- OWNER REVIEW SCORE -->
+                                <div class="col-xl-6" style="display: flex;padding-left: 0;"> <!-- results_div_owner_review -->
+                                    <div class="results_div_owner_review" score="{{ boat.review_score }}"
+                                        score-count="{{ boat.reviews_count }}">
+                                        <img src="{% static 'media/admin/shat.png' %}" alt="captain" style="width: 20px;">
+                                    </div>
+                                </div>
+                                <!-- BOAT PRICE PER PERSON -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_price_pperson -->
+                                    <div class="results_subdiv_price_pperson">
+                                        <p><strong>R$ {{ boat.price_pperson_overnight }},00</strong> /pessoa</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 boat_single_div" onclick="$('#boat_view_{{ boat.pk }}').submit()"  id="boat_{{ boat.pk }}" style=" padding: 1%;">
+                        <div class="results_div_item"
+                        {% if forloop.last and boats.has_next %}
+                            ic-trigger-on="scrolled-into-view"
+                            ic-target="#search_results"
+                            ic-indicator="#indicator"
+                        {% endif %}
+                        >
+                            <img class="results_div_img img-fluid" src="{% static 'media/admin/background.jpg' %}" alt="boat"
+                                    onerror="this.src='{% static 'media/admin/semimagem.jpg' %}'">
+                            <i class="far fa-heart heart" id="heart_{{ boat.pk }}"
+                                onmouseenter="$('#'+this.id).removeClass('far').addClass('fas');"
+                                onmouseleave="if (!($('#'+this.id).hasClass('added'))){$('#'+this.id).removeClass('fas').addClass('far');}"
+                                onclick="event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();AddToFavorite(this.id, '{{ user.is_authenticated }}');"></i>
+                                <span><strong>R$ {{ boat.price_overnight }}</strong>/24h</span>
+                        </div>
+                        <p class="fontSizeOneive w-100" style="margin-top: 20px;">{{ boat.title }}</p>
+                        <div class="results_div_owner_pic">
+                            <img src="{% static 'media/admin/background.jpg' %}" alt="owner"
+                                    onerror="this.src='{% static 'media/admin/default_profile.png' %}'">
+                        </div>
+                        <div class="container"> <!-- results_div_owner_data -->
+                            <div class="row">
+                                <!-- OWNER NAME -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!--results_div_owner_name -->
+                                    <p class="fontSizeOneTwo owner_name_p">{{ boat.user.first_name }}</p>
+                                </div>
+                                <!-- BOAT CAPACITY -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_capacity -->
+                                    <p class="fontSizeOneTwo"><i class="fas fa-users"></i> até {{ boat.capacity }} pessoas</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- OWNER REVIEW SCORE -->
+                                <div class="col-xl-6" style="display: flex;padding-left: 0;"> <!-- results_div_owner_review -->
+                                    <div class="results_div_owner_review" score="{{ boat.review_score }}"
+                                        score-count="{{ boat.reviews_count }}">
+                                        <img src="{% static 'media/admin/shat.png' %}" alt="captain" style="width: 20px;">
+                                    </div>
+                                </div>
+                                <!-- BOAT PRICE PER PERSON -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_price_pperson -->
+                                    <div class="results_subdiv_price_pperson">
+                                        <p><strong>R$ {{ boat.price_pperson_overnight }},00</strong> /pessoa</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 boat_single_div" onclick="$('#boat_view_{{ boat.pk }}').submit()"  id="boat_{{ boat.pk }}" style=" padding: 1%;">
+                        <div class="results_div_item"
+                        {% if forloop.last and boats.has_next %}
+                            ic-trigger-on="scrolled-into-view"
+                            ic-target="#search_results"
+                            ic-indicator="#indicator"
+                        {% endif %}
+                        >
+                            <img class="results_div_img img-fluid" src="{% static 'media/admin/background.jpg' %}" alt="boat"
+                                    onerror="this.src='{% static 'media/admin/semimagem.jpg' %}'">
+                            <i class="far fa-heart heart" id="heart_{{ boat.pk }}"
+                                onmouseenter="$('#'+this.id).removeClass('far').addClass('fas');"
+                                onmouseleave="if (!($('#'+this.id).hasClass('added'))){$('#'+this.id).removeClass('fas').addClass('far');}"
+                                onclick="event.preventDefault();event.stopPropagation();event.stopImmediatePropagation();AddToFavorite(this.id, '{{ user.is_authenticated }}');"></i>
+                                <span><strong>R$ {{ boat.price_overnight }}</strong>/24h</span>
+                        </div>
+                        <p class="fontSizeOneive w-100" style="margin-top: 20px;">Aluguel de Escuna 70' Ilhabela</p>
+                        <div class="results_div_owner_pic">
+                            <img src="{% static 'media/admin/background.jpg' %}" alt="owner"
+                                    onerror="this.src='{% static 'media/admin/default_profile.png' %}'">
+                        </div>
+                        <div class="container"> <!-- results_div_owner_data -->
+                            <div class="row">
+                                <!-- OWNER NAME -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!--results_div_owner_name -->
+                                    <p class="fontSizeOneTwo owner_name_p">Ricardo Cretella</p>
+                                </div>
+                                <!-- BOAT CAPACITY -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_capacity -->
+                                    <p class="fontSizeOneTwo"><i class="fas fa-users"></i> até 98 pessoas</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!-- OWNER REVIEW SCORE -->
+                                <div class="col-xl-6" style="display: flex;padding-left: 0;"> <!-- results_div_owner_review -->
+                                    <div class="results_div_owner_review" score="{{ boat.review_score }}"
+                                        score-count="{{ boat.reviews_count }}">
+                                        <img src="{% static 'media/admin/shat.png' %}" alt="captain" style="width: 20px;">
+                                    </div>
+                                </div>
+                                <!-- BOAT PRICE PER PERSON -->
+                                <div class="col-xl-6" style="padding-left: 0;"> <!-- results_div_price_pperson -->
+                                    <div class="results_subdiv_price_pperson">
+                                        <p><strong>R$ 59,00</strong> /pessoa</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>  
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+          </a>
+    </div>
+    <div id="text">
+        <a href="">VER MAIS OPÇÕES</a>
+    </div>
     <div class="container pb-4">
             <div class="row">
                 <div class="col-12">
@@ -53,10 +226,6 @@
                                         <p class="card-text">Além de ser uma das rotas mais bonitas para se visitar no país, Paraty ainda nos reserva belezas pouco exploradas. A chamada Costa Verde (extremo Sul do litoral do Rio ...</p>
                                         <a href="{{ post.get_absolute_url }}" class="btn btn-outline-primary mt-auto">Ler a matéria completa &rarr;</a>
                                     </div>
-                                    <div class="card-footer text-muted">
-                                        Postado em 16 de Dezembro de 2019 por
-                                        <a href="#">ana@perpetualbeta.com.br</a>
-                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-6 d-flex align-items-stretch">
@@ -67,10 +236,6 @@
                                         <p class="card-text">Está chegando a época do ano em que temos alguns dias para descansar e fazer o que gostaríamos de ter feito o resto do ano mas não deu tempo: as ...</p>
                                         <a href="{{ post.get_absolute_url }}" class="btn btn-outline-primary mt-auto">Ler a matéria completa &rarr;</a>
                                     </div>
-                                    <div class="card-footer text-muted">
-                                        Postado em 11 de Dezembro de 2019 por
-                                        <a href="#">ana@perpetualbeta.com.br</a>
-                                    </div>
                                 </div>
                             </div>
                     </div>
@@ -79,7 +244,7 @@
     </div>
 
     <div>
-        <div id="text_div"><h4>Aceleradoras</h4></div>
+        <div id="text_div"><h4>ACELERADORAS</h4></div>
         <div class="colaboradores">
         <img class="card-img-top" src="{% static 'media/admin/gbg.jpg' %}" alt="Blog" style="width: 15%;">
         <img class="card-img-top" src="{% static 'media/admin/startup.jpg' %}" alt="Blog" style="width: 7%;">
